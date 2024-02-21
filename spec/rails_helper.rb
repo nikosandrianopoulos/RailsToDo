@@ -57,7 +57,9 @@ RSpec.configure do |config|
   #adding factorybot methods
   config.include FactoryBot::Syntax::Methods
   
-  config.include RequestSpecHelper, type: :request
+  config.include RequestSpecHelper
+
+  config.include ControllerSpecHelper
   #tranctuating all the tables but use the faster transaction strategy
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
