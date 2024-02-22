@@ -51,7 +51,7 @@ end
 
 group :test do
   gem 'factory_bot_rails', '~> 4.0'
-  gem 'shoulda-matchers', '~> 3.1'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'faker', git: 'https://github.com/stympy/faker.git'
   gem 'database_cleaner'
   
