@@ -4,33 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Documentation</title>
-    <!-- Link your CSS file here -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <!-- Include Swagger UI default CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist/swagger-ui.css">
 </head>
 <body>
-    <!-- Embed your OpenAPI specification using Swagger UI or ReDoc -->
-    <!-- Example using Swagger UI -->
     <div id="swagger-ui"></div>
     <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist/swagger-ui-bundle.js"></script>
     <script>
-        window.onload = function() {
-            // Begin Swagger UI call region
-            const ui = SwaggerUIBundle({
-                url: "/openapi.yaml",
-                dom_id: '#swagger-ui',
-                deepLinking: true,
-                presets: [
+        window.onload = function(){
+            //calling swagger-ui
+            const ui = SwaggerUIBundle(
+                {
+                    url: "/openapi.yaml",
+                    dom_id: '#swagger-ui',
+                    deepLinking: true,
+                    presets:[ 
                     SwaggerUIBundle.presets.apis,
                     SwaggerUIBundle.SwaggerUIStandalonePreset
-                ],
-                plugins: [
+                    ],
+                    plugins: [
                     SwaggerUIBundle.plugins.DownloadUrl
-                ],
-                layout: "BaseLayout"
-            })
-            // End Swagger UI call region
+                    ],
+                    layout: "BaseLayout"
+
+                }
+            )
+            //ending call
             window.ui = ui
         }
     </script>
-</body>
-</html>
+    </body>
+    </html>

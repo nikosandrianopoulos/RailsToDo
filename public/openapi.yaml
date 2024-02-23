@@ -6,6 +6,16 @@ info:
 servers:
   - url: "http://localhost:3000"
 paths:
+  /signup:
+    post:
+      summary: Register a new user
+      description: Endpoint to sign up a new user.
+      responses:
+        '201':
+          description: User successfully created.
+        '400':
+          description: Bad request. Invalid input, email already exists, passwords do not match, etc.
+          
   /auth/login:
     post:
       summary: "User Login"
@@ -39,6 +49,8 @@ paths:
       responses:
         '200':
           description: "Successful operation"
+        '400':
+          description: "Invalid request"
 
     post:
       summary: "Create Todo"
