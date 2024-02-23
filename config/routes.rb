@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :todos do
     resources :items
@@ -9,6 +8,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   get '/api_docs', to: 'api_docs#show'
+  mount SwaggerUiEngine::Engine, at: 'assets/config/api_docs'
 
 
   # Defines the root path route ("/")

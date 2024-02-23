@@ -1,0 +1,240 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Todo List API"
+  description: "REST API for managing todo lists"
+servers:
+  - url: "http://localhost:3000"
+paths:
+  /auth/login:
+    post:
+      summary: "User Login"
+      description: "Endpoint for user authentication"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+      responses:
+        '200':
+          description: "Successful login"
+        '401':
+          description: "Unauthorized"
+        '400':
+          description: "Invalid request"
+
+  /todos:
+    get:
+      summary: "Get All Todos"
+      description: "Endpoint to retrieve all todos"
+      responses:
+        '200':
+          description: "Successful operation"
+
+    post:
+      summary: "Create Todo"
+      description: "Endpoint to create a new todo"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              required:
+                - title
+      responses:
+        '201':
+          description: "Todo created successfully"
+        '400':
+          description: "Invalid request"
+
+  /todos/{id}:
+    get:
+      summary: "Get Todo by ID"
+      description: "Endpoint to retrieve a todo by its ID"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo to retrieve"
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Successful operation"
+        '404':
+          description: "Todo not found"
+
+    put:
+      summary: "Update Todo"
+      description: "Endpoint to update a todo"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo to update"
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+              required:
+                - title
+      responses:
+        '200':
+          description: "Todo updated successfully"
+        '404':
+          description: "Todo not found"
+        '400':
+          description: "Invalid request"
+
+    delete:
+      summary: "Delete Todo"
+      description: "Endpoint to delete a todo"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo to delete"
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Todo deleted successfully"
+        '404':
+          description: "Todo not found"
+
+  /todos/{id}/items/{itemId}:
+    get:
+      summary: "Get Todo Item by ID"
+      description: "Endpoint to retrieve a todo item by its ID"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo containing the item"
+          schema:
+            type: integer
+        - in: path
+          name: itemId
+          required: true
+          description: "ID of the item to retrieve"
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Successful operation"
+        '404':
+          description: "Todo item not found"
+
+    post:
+      summary: "Create Todo Item"
+      description: "Endpoint to create a new todo item"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo to which the item belongs"
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                completed:
+                  type: boolean
+              required:
+                - description
+      responses:
+        '201':
+          description: "Todo item created successfully"
+        '404':
+          description: "Todo not found"
+        '400':
+          description: "Invalid request"
+
+    put:
+      summary: "Update Todo Item"
+      description: "Endpoint to update a todo item"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo to which the item belongs"
+          schema:
+            type: integer
+        - in: path
+          name: itemId
+          required: true
+          description: "ID of the item to update"
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                completed:
+                  type: boolean
+              required:
+                - description
+      responses:
+        '200':
+          description: "Todo item updated successfully"
+        '404':
+          description: "Todo item not found"
+        '400':
+          description: "Invalid request"
+
+    delete:
+      summary: "Delete Todo Item"
+      description: "Endpoint to delete a todo item"
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "ID of the todo to which the item belongs"
+          schema:
+            type: integer
+        - in: path
+          name: itemId
+          required: true
+          description: "ID of the item to delete"
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Todo item deleted successfully"
+        '404':
+          description: "Todo item not found"
